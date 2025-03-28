@@ -1,0 +1,40 @@
+body {
+    background-color: #3866A8; /*mudar cor de fundo*/
+    font-family: 'Segoe UI', sans-serif; /*mudar fonte*/
+    color: azure;
+}
+img {
+    max-width: 100%; /*largura máxima da imagem */
+}
+div.lado-esquerdo {
+    width: 50%; /*Define a largura do lado esquerdo */
+}
+div.lado-direito {
+    width: 50%; /*Define a largura do lado direito */
+    display: flex;
+    flex-direction: column;
+}
+div.conteudo {
+    display: flex; /*Define que a div "conteúdo" será flexível */
+}
+a.botao {
+    color: aliceblue;
+}
+div.lado-esquerdo img {
+    width: 100%; /*muda largura da imagem*/
+    border-radius: 0px;
+}
+div.lado-direito a {
+    text-decoration: none; /*retira o sublinhado padrão doa links*/
+    font-size: 23px;
+    background-color: #272320;
+    width: 38%;
+    margin: 3%;
+    padding: 5px;
+    color: azure;
+    text-align: center; /*centraliza o texto*/
+    border-radius: 30px; /*Arredonda a borda da imagem*/
+}
+div.formulario {
+    background-color: rgba(0, 191, 255, 0.247);
+}
