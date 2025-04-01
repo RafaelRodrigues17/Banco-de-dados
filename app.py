@@ -1,10 +1,11 @@
 # Importando as bibliotecas necessárias: Flask para a aplicação web e werkzeug para segurança de senhas
-from flask import Flask, render_template, request 
+from flask import Flask, render_template, request, session, redirect, url_for
 from werkzeug.security import generate_password_hash, check_password_hash
 import database  # Importando o arquivo onde o banco de dados é manipulado
 
 # Criando a aplicação Flask
 app = Flask(__name__) 
+app.secret_key ="SENHA SECRETA" #senha secreta que geralmente
 
 # Rota principal ('/') que renderiza o template 'index.html'
 @app.route('/')
@@ -18,7 +19,8 @@ def login():
         form = request.form  # Coletando os dados do formulário de login
         # Chamando a função 'login' do arquivo database para verificar a senha
         if database.login(form) == True:
-            return render_template('lista.html')  # Se login for bem-sucedido, redireciona para 'lista.html'
+            session['usuario'] = form['email'] # Armazena o email do usário na sessão
+            return redirect(url_for('lista'))
         else:
             return "Ocorreu um erro ao fazer o login do usuário"  # Caso contrário, exibe mensagem de erro
     else:
@@ -36,6 +38,12 @@ def cadastro():
             return "Ocorreu um erro ao cadastrar usuário"  # Caso contrário, exibe mensagem de erro
     else:
         return render_template('cadastro.html')  # Se for GET, renderiza o formulário de cadastro
+    
+@app.route('/lista') 
+def lista():
+    if 'usuario' not in session:
+        return redirect(url_for('login'))
+    return render_template('lista.html')
 
 # Executa a aplicação Flask no modo de debug
 if __name__ == '__main__':
