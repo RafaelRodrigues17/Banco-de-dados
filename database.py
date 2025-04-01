@@ -1,59 +1,79 @@
 import sqlite3
 from werkzeug.security import generate_password_hash, check_password_hash
 
+# Função para conectar ao banco de dados SQLite
 def conectar_banco():
     conexao = sqlite3.connect("tarefas.db")
     return conexao
 
+# Função para criar as tabelas do banco de dados, caso não existam
 def criar_tabelas():
     conexao = conectar_banco()
     cursor = conexao.cursor()
-    cursor.execute('''create table if not exists usuarios
-                   (email text primary key,nome text,senha text)''')
     
-    cursor.execute('''create table if not exists tarefas
-                   (id integer primary key, conteudo text, esta_concluida integer, email text,
-                   FOREIGN KEY(email_usuario) REFERENCES usuarios(email))''')
+    # Criando a tabela de usuários
+    cursor.execute('''CREATE TABLE IF NOT EXISTS usuarios
+                   (email TEXT PRIMARY KEY, nome TEXT, senha TEXT)''')
+    
+    # Criando a tabela de tarefas
+    cursor.execute('''CREATE TABLE IF NOT EXISTS tarefas
+                   (id INTEGER PRIMARY KEY, conteudo TEXT, esta_concluida INTEGER, email TEXT,
+                   FOREIGN KEY(email) REFERENCES usuarios(email))''')
     
     conexao.commit()
-    
+
+# Função para criar um novo usuário no banco de dados
 def criar_usuario(formulario):
     conexao = conectar_banco()
     cursor = conexao.cursor()
-    cursor.execute('''SELECT COUNT (email) FROM usuarios WHERE email=?''', (formulario['email'],))
+    
+    # Verificando se o e-mail já está cadastrado
+    cursor.execute('''SELECT COUNT(email) FROM usuarios WHERE email=?''', (formulario['email'],))
     conexao.commit()
     
     quantidade_de_emails = cursor.fetchone()
     print(quantidade_de_emails)
-    if (quantidade_de_emails [0]> 0):
-        print("E-mail já cadastrado! tente novamente")
+    
+    # Se o e-mail já existir, retorna False
+    if quantidade_de_emails[0] > 0:
+        print("E-mail já cadastrado! Tente novamente")
         return False
     
+    # Criptografando a senha do usuário
     senha_criptografada = generate_password_hash(formulario['senha'])
-    cursor.execute('''insert into usuarios(email, nome, senha) 
+    
+    # Inserindo os dados do novo usuário no banco
+    cursor.execute('''INSERT INTO usuarios(email, nome, senha) 
                    VALUES (?, ?, ?)''', (formulario['email'], formulario['nome'], senha_criptografada))
     
     conexao.commit()
     return True
 
+# Função para realizar login de um usuário
 def login(formulario):
     conexao = conectar_banco()
     cursor = conexao.cursor()
-    cursor.execute('''SELECT COUNT (email) FROM usuarios WHERE email=?''', (formulario['email'],))
+    
+    # Verificando se o e-mail existe no banco de dados
+    cursor.execute('''SELECT COUNT(email) FROM usuarios WHERE email=?''', (formulario['email'],))
     conexao.commit()
     
     quantidade_de_emails = cursor.fetchone()
     print(quantidade_de_emails)
-    if (quantidade_de_emails [0]== 0):
-        print("E-mail não cadastrado! tente novamente")
+    
+    # Se o e-mail não estiver cadastrado, retorna False
+    if quantidade_de_emails[0] == 0:
+        print("E-mail não cadastrado! Tente novamente")
         return False
     
-    cursor.execute('''select senha FROM usuarios WHERE
-                   email=? ''', (formulario['email'],))
-    
+    # Obtendo a senha criptografada do usuário no banco
+    cursor.execute('''SELECT senha FROM usuarios WHERE email=?''', (formulario['email'],))
     conexao.commit()
     senha_criptografada = cursor.fetchone()
-    return check_password_hash (senha_criptografada [0], formulario['senha'])
+    
+    # Verificando se a senha fornecida corresponde à senha armazenada
+    return check_password_hash(senha_criptografada[0], formulario['senha'])
 
+# Executando a função de criação de tabelas se o script for executado diretamente
 if __name__ == "__main__":
     criar_tabelas()
