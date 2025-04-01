@@ -7,6 +7,21 @@
     <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
+    <h1>login</h1>
+    <div class="formulario">
+       <form action="/login" method ="POST">
+
+          <label for ="email">E-mail</label>
+          <input type="text" id="email" name="email" required>
+          <br>
+
+          <label for ="senha">Senha</label>
+          <input type="password" id="senha" name="senha" required>
+          <br>
+
+          <button type="submit" class="btn">login</button>
+      </form>
+    </div>  
     
 </body>
 </html>

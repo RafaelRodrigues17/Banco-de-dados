@@ -1,40 +1,78 @@
+/* Estilo retro anos 90 */
 body {
-    background-color: #3866A8; /*mudar cor de fundo*/
-    font-family: 'Segoe UI', sans-serif; /*mudar fonte*/
-    color: azure;
+    background-color: #1a1a66; /* Fundo azul escuro */
+    font-family: 'Courier New', Courier, monospace; /* Fonte antiga de máquina de escrever */
+    color: #ffffff; /* Texto branco */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
 }
-img {
-    max-width: 100%; /*largura máxima da imagem */
+
+h1 {
+    font-size: 3rem;
+    color: #66ccff; /* Azul claro */
+    text-shadow: 2px 2px 5px #000000; /* Sombra no título */
+    margin-bottom: 20px;
 }
-div.lado-esquerdo {
-    width: 50%; /*Define a largura do lado esquerdo */
+
+.formulario {
+    background-color: #003366; /* Azul escuro */
+    padding: 20px;
+    border-radius: 10px;
+    border: 3px solid #66ccff;
+    width: 300px;
+    box-shadow: 0px 0px 10px #000000;
 }
-div.lado-direito {
-    width: 50%; /*Define a largura do lado direito */
+
+form {
     display: flex;
     flex-direction: column;
 }
-div.conteudo {
-    display: flex; /*Define que a div "conteúdo" será flexível */
+
+label {
+    font-size: 1.2rem;
+    margin: 5px 0;
+    font-weight: bold;
 }
-a.botao {
-    color: aliceblue;
+
+input[type="text"],
+input[type="password"] {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 2px solid #66ccff;
+    background-color: #003366;
+    color: #ffffff;
+    font-size: 1rem;
 }
-div.lado-esquerdo img {
-    width: 100%; /*muda largura da imagem*/
-    border-radius: 0px;
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+    outline: none;
+    border-color: #ffcc00; /* Cor dourada para foco */
+    background-color: #1a1a66;
 }
-div.lado-direito a {
-    text-decoration: none; /*retira o sublinhado padrão doa links*/
-    font-size: 23px;
-    background-color: #272320;
-    width: 38%;
-    margin: 3%;
-    padding: 5px;
-    color: azure;
-    text-align: center; /*centraliza o texto*/
-    border-radius: 30px; /*Arredonda a borda da imagem*/
+
+button.btn {
+    padding: 10px;
+    background-color: #66ccff;
+    color: #003366;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
-div.formulario {
-    background-color: rgba(0, 191, 255, 0.247);
+
+button.btn:hover {
+    background-color: #ffcc00; /* Cor dourada para hover */
+    color: #003366;
+}
+
+br {
+    margin-bottom: 15px;
 }
