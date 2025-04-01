@@ -4,110 +4,123 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Tarefas</title>
+    <!-- Link para a fonte 'Trebuchet MS' -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Trebuchet+MS&display=swap">
     <style>
+        /* Estilos gerais para o body */
         body {
-            font-family: 'Trebuchet MS', sans-serif;
-            background: linear-gradient(to right, #a0e3ff, #74c0fc);
-            height: 100vh;
+            font-family: 'Trebuchet MS', sans-serif;  /* Fonte usada no site */
+            background: linear-gradient(to right, #a0e3ff, #74c0fc);  /* Gradiente de fundo */
+            height: 100vh;  /* Altura total da janela */
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
+            justify-content: center;  /* Alinha ao centro verticalmente */
+            align-items: center;  /* Alinha ao centro horizontalmente */
+            overflow: hidden;  /* Evita que o conteúdo ultrapasse os limites da tela */
             position: relative;
             text-align: center;
         }
 
+        /* Estilo para o título */
         h1 {
-            color: #093554;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            margin-bottom: 30px;
-            font-size: 2.5em;
+            color: #093554;  /* Cor do texto */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);  /* Sombra no texto */
+            margin-bottom: 30px;  /* Espaço abaixo do título */
+            font-size: 2.5em;  /* Tamanho da fonte */
             position: relative;
-            z-index: 2;
+            z-index: 2;  /* Garantir que o título apareça acima dos outros elementos */
         }
 
+        /* Estilos para o container de conteúdo */
         .conteudo {
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(250, 228, 146, 0.85);
-            padding: 50px;
-            border-radius: 25px;
-            box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.3);
-            animation: float 3s ease-in-out infinite alternate;
-            width: 45%;
-            min-width: 600px;
+            background: rgba(250, 228, 146, 0.85);  /* Cor de fundo com transparência */
+            padding: 50px;  /* Espaçamento interno */
+            border-radius: 25px;  /* Bordas arredondadas */
+            box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.3);  /* Sombra do box */
+            animation: float 3s ease-in-out infinite alternate;  /* Animação de flutuação */
+            width: 45%;  /* Largura do container */
+            min-width: 600px;  /* Largura mínima */
             position: relative;
-            z-index: 2;
-            border: 5px solid #093554; /* Adiciona uma borda azul */
+            z-index: 2;  /* Garantir que o conteúdo fique acima das bolhas */
+            border: 5px solid #093554;  /* Borda azul */
         }
 
+        /* Estilo para a imagem */
         .lado-esquerdo img {
-            max-width: 510px;
-            border-radius: 5%;
-            border: 5px solid ; /* Adiciona uma borda azul na imagem*/
+            max-width: 510px;  /* Largura máxima da imagem */
+            border-radius: 5%;  /* Bordas arredondadas na imagem */
+            border: 5px solid #093554;  /* Borda azul na imagem */
         }
 
+        /* Estilos para o lado direito (botões) */
         .lado-direito {
             display: flex;
             flex-direction: column;
-            gap: 20px;
-            margin-left: 40px;
+            gap: 20px;  /* Espaço entre os botões */
+            margin-left: 40px;  /* Margem à esquerda */
         }
 
+        /* Estilo para os botões */
         .botao {
-            background: #093554;
-            color: white;
-            text-decoration: none;
-            padding: 18px 30px;
-            border-radius: 15px;
-            box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.2);
-            transition: 0.3s;
-            font-size: 1.5em;
-            font-weight: bold;
+            background: #093554;  /* Cor de fundo do botão */
+            color: white;  /* Cor do texto */
+            text-decoration: none;  /* Remove sublinhado */
+            padding: 18px 30px;  /* Espaçamento interno */
+            border-radius: 15px;  /* Bordas arredondadas */
+            box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.2);  /* Sombra do botão */
+            transition: 0.3s;  /* Transição suave */
+            font-size: 1.5em;  /* Tamanho da fonte */
+            font-weight: bold;  /* Negrito */
             position: relative;
-            z-index: 2;
+            z-index: 2;  /* Botões acima das bolhas */
         }
 
+        /* Efeito de hover nos botões */
         .botao:hover {
-            background: #0072bc;
-            transform: scale(1.1);
+            background: #0072bc;  /* Cor de fundo ao passar o mouse */
+            transform: scale(1.1);  /* Aumenta o tamanho do botão */
         }
 
+        /* Animação de flutuação para o container de conteúdo */
         @keyframes float {
             from { transform: translateY(0px); }
             to { transform: translateY(15px); }
         }
 
+        /* Estilo para as bolhas */
         .bubble {
             position: absolute;
-            background: rgba(255, 255, 255, 0.5);
-            border-radius: 50%;
-            opacity: 0.6;
-            animation: floatBubbles 5s infinite alternate ease-in-out;
-            z-index: 1;
+            background: rgba(255, 255, 255, 0.5);  /* Cor de fundo semitransparente */
+            border-radius: 50%;  /* Forma de bolha */
+            opacity: 0.6;  /* Opacidade */
+            animation: floatBubbles 5s infinite alternate ease-in-out;  /* Animação das bolhas */
+            z-index: 1;  /* Coloca as bolhas atrás do conteúdo */
         }
 
+        /* Animação das bolhas (movimento para cima) */
         @keyframes floatBubbles {
             from { transform: translateY(0px); }
             to { transform: translateY(-20px); }
         }
 
+        /* Decoração adicional (círculos pulsantes) */
         .decoracao {
             position: absolute;
             width: 150px;
             height: 150px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            top: 8%;
-            left: 12%;
-            box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
-            animation: pulse 3s infinite alternate;
-            z-index: 1;
+            background: rgba(255, 255, 255, 0.2);  /* Cor de fundo semitransparente */
+            border-radius: 50%;  /* Forma de círculo */
+            top: 8%;  /* Posição no topo */
+            left: 12%;  /* Posição à esquerda */
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);  /* Sombra suave */
+            animation: pulse 3s infinite alternate;  /* Animação de pulsação */
+            z-index: 1;  /* Coloca atrás do conteúdo */
         }
 
+        /* Animação de pulsação do círculo */
         @keyframes pulse {
             from { transform: scale(1); }
             to { transform: scale(1.3); }
@@ -115,34 +128,40 @@
     </style>
 </head>
 <body>
+    <!-- Decoração adicional no fundo -->
     <div class="decoracao"></div>
+    <!-- Título da página -->
     <h1>Lista de Tarefas Digital</h1>
+    <!-- Container para a imagem e os botões -->
     <div class="conteudo">
         <div class="lado-esquerdo">
-            <img src="/static/img/celulares.png" alt="Celular e Computador">
+            <img src="/static/img/celulares.png" alt="Celular e Computador"> <!-- Imagem -->
         </div>
         <div class="lado-direito">
+            <!-- Botões para login e cadastro -->
             <a class="botao" href="/login">Já tenho uma conta</a>
             <a class="botao" href="/cadastro">Não tenho uma conta</a>
         </div>
     </div>
-    
+
+    <!-- Script para criar bolhas animadas no fundo -->
     <script>
         function createBubbles() {
+            // Cria 25 bolhas aleatórias
             for (let i = 0; i < 25; i++) {
                 let bubble = document.createElement("div");
-                bubble.classList.add("bubble");
-                let size = Math.random() * 120 + 40;
+                bubble.classList.add("bubble");  // Adiciona a classe 'bubble'
+                let size = Math.random() * 120 + 40;  // Define um tamanho aleatório para cada bolha
                 bubble.style.width = size + "px";
                 bubble.style.height = size + "px";
-                bubble.style.left = Math.random() * window.innerWidth + "px";
-                bubble.style.top = Math.random() * window.innerHeight + "px";
-                bubble.style.animationDuration = Math.random() * 3 + 2 + "s";
-                bubble.style.zIndex = 0;
-                document.body.appendChild(bubble);
+                bubble.style.left = Math.random() * window.innerWidth + "px";  // Posição aleatória na tela
+                bubble.style.top = Math.random() * window.innerHeight + "px";  // Posição aleatória na tela
+                bubble.style.animationDuration = Math.random() * 3 + 2 + "s";  // Duração aleatória da animação
+                bubble.style.zIndex = 0;  // Garante que as bolhas ficam atrás do conteúdo
+                document.body.appendChild(bubble);  // Adiciona as bolhas ao corpo da página
             }
         }
-        createBubbles();
+        createBubbles();  // Chama a função para criar as bolhas
     </script>
 </body>
 </html>
