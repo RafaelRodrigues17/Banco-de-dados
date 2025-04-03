@@ -74,6 +74,24 @@ def login(formulario):
     # Verificando se a senha fornecida corresponde à senha armazenada
     return check_password_hash(senha_criptografada[0], formulario['senha'])
 
-# Executando a função de criação de tabelas se o script for executado diretamente
+def criar_tarefa(conteudo, email):
+    conexao = conectar_banco()
+    cursor = conexao.cursor()
+    cursor.execute('''INSERT INTO tarefas (conteudo, esta_concluida, email)
+                   VALUES (?, ?, ?) ''',
+                   (conteudo, False, email))
+    conexao.commit()
+    return True
+
+def buscar_tarefas(email):
+    conexao = conectar_banco()
+    cursor = conexao.cursor()
+    cursor.execute(''' SELECT id, conteudo, esta_concluida
+                   FROM tarefas WHERE email=?''',
+                   (email,))
+    conexao.commit()
+    tarefas = cursor.fetchall()
+    return tarefas
+
 if __name__ == "__main__":
     criar_tabelas()

@@ -19,7 +19,7 @@ def login():
         form = request.form  # Coletando os dados do formulário de login
         # Chamando a função 'login' do arquivo database para verificar a senha
         if database.login(form) == True:
-            session['usuario'] = form['email'] # Armazena o email do usário na sessão
+            session['usuario'] = form['email'] # Armazena o email do usuário na sessão
             return redirect(url_for('lista'))
         else:
             return "Ocorreu um erro ao fazer o login do usuário"  # Caso contrário, exibe mensagem de erro
@@ -43,8 +43,20 @@ def cadastro():
 def lista():
     if 'usuario' not in session:
         return redirect(url_for('login'))
-    return render_template('lista.html')
+    
+    lista_tarefas = database.buscar_tarefas(session['usuario'])
+    print(lista_tarefas)
+    
+    return render_template('lista.html', tarefas=lista_tarefas)
 
+@app.route('/criar_tarefa', methods=["POST"])
+def criar_tarefa():
+    form = request.form
+    if database.criar_tarefa(form['conteudo'], session['usuario']) == True:
+        return redirect(url_for('lista'))
+    else:
+        return "Ocorreu um erro ao registar tarefa"
+    
 # Executa a aplicação Flask no modo de debug
 if __name__ == '__main__':
     app.run(debug=True)

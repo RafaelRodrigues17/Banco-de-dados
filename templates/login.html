@@ -3,25 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>login</title>
-    <link rel="stylesheet" href="/static/styles.css">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Trebuchet+MS&display=swap">
+    <style>
+        body {
+            font-family: 'Trebuchet MS', sans-serif;
+            background: linear-gradient(to right, #a0e3ff, #74c0fc);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        h1 {
+            color: #093554;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            margin-bottom: 20px;
+            font-size: 2.5em;
+        }
+
+        .formulario {
+            background: rgba(250, 228, 146, 0.85);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.3);
+            width: 350px;
+            border: 4px solid #093554;
+        }
+
+        label {
+            font-size: 1.2em;
+            color: #093554;
+            display: block;
+            margin-bottom: 5px;
+            text-align: left;
+        }
+
+        input {
+            width: 91%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border: 2px solid #093554;
+            font-size: 1em;
+        }
+
+        .btn {
+            background: #093554;
+            color: white;
+            padding: 12px 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            width: 100%;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #0072bc;
+            transform: scale(1.05);
+        }
+    </style>
 </head>
 <body>
-    <h1>login</h1>
+    <h1>Login</h1>
     <div class="formulario">
-       <form action="/login" method ="POST">
-
-          <label for ="email">E-mail</label>
+       <form action="/login" method="POST">
+          <label for="email">E-mail</label>
           <input type="text" id="email" name="email" required>
-          <br>
 
-          <label for ="senha">Senha</label>
+          <label for="senha">Senha</label>
           <input type="password" id="senha" name="senha" required>
-          <br>
 
-          <button type="submit" class="btn">login</button>
+          <button type="submit" class="btn">Login</button>
       </form>
     </div>  
-    
 </body>
 </html>
