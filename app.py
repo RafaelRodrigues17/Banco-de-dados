@@ -56,6 +56,29 @@ def criar_tarefa():
         return redirect(url_for('lista'))
     else:
         return "Ocorreu um erro ao registar tarefa"
+
+@app.route('/tarefas/atualizar/<int:id>', methods=['GET'])
+def tarefa_concluida(id):
+    if database.tarefa_concluida(id):
+        return redirect(url_for('lista'))
+    else:
+        return "Ocorreu um erro ao marcar a tarefa como concluída"
+
+@app.route('/tarefas/excluir/<int:id>', methods=['GET'])
+def tarefa_excluir(id):
+    if database.tarefa_excluir(id):
+        return redirect(url_for('lista'))
+    else:
+        return "Ocorreu um erro ao excluir a tarefa"
+
+@app.route('excluir_usuario')
+def excluir_usuario():
+    email = session['usuario']
+    
+    if database.excluir_usuario(email):
+        return redirect(url_for('hello'))
+    else:
+        return "Ocorreu um erro ao excluir o usuário"
     
 # Executa a aplicação Flask no modo de debug
 if __name__ == '__main__':

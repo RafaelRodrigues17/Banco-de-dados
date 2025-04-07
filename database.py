@@ -93,5 +93,40 @@ def buscar_tarefas(email):
     tarefas = cursor.fetchall()
     return tarefas
 
+def tarefa_concluida(id):
+    conexao = conectar_banco()
+    cursor = conexao.cursor()
+    cursor.execute(''' SELECT esta_concluida FROM tarefas WHERE id=?''',(id,))
+    esta_concluida = cursor.fetchone()
+    esta_concluida = esta_concluida[0]
+    print(esta_concluida)
+    
+    if (esta_concluida):
+        esta_concluida = False
+    else:
+        esta_concluida = True
+        
+    cursor.execute('''UPDATE tarefas set esta_concluida =? where id=?''', (esta_concluida, id))
+    conexao.commit()
+    return True
+
+def tarefa_excluir(id):
+    conexao = conectar_banco()
+    cursor = conexao.cursor()
+    
+    cursor.execute('''DELETE FROM tarefas WHERE id=?''', (id,))
+    
+    conexao.commit()
+    return True
+
+def excluir_usuario(email):
+    conexao = conectar_banco()
+    cursor = conexao.cursor()
+    
+    cursor.execute('''DELETE FROM usuarios WHERE email_usuario=?''', (email,))
+    cursor.execute('''DELETE FROM usuarios WHERE email=?''', (email,))
+    conexao.commit()
+    return True
+
 if __name__ == "__main__":
     criar_tabelas()
