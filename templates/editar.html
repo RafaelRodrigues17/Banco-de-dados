@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Editar Tarefas</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Trebuchet+MS&display=swap" />
+  <style>
+    body {
+      font-family: 'Trebuchet MS', sans-serif;
+      background: url('/static/img/celulares.png') no-repeat center center fixed;
+      background-size: cover;
+      height: 100vh;
+      margin: 0;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(8px);
+      z-index: 0;
+    }
+
+    .conteudo {
+      position: relative;
+      z-index: 1;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #093554;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      margin-bottom: 20px;
+      font-size: 2.5em;
+    }
+
+    .formulario {
+      background: rgba(250, 228, 146, 0.85);
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.3);
+      width: 400px;
+      border: 4px solid #093554;
+      margin-bottom: 25px;
+    }
+
+    input[type="text"] {
+      width: calc(100% - 22px);
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      border: 2px solid #093554;
+      font-size: 1.2em;
+    }
+
+    .btn {
+      background: #093554;
+      color: white;
+      padding: 15px 25px;
+      font-size: 1.3em;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      width: 100%;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #0072bc;
+      transform: scale(1.05);
+    }
+
+    .checkbox {
+      font-size: 1.2em;
+      color: #093554;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 10px 0;
+    }
+
+    .acao-btn {
+        margin-left: 10px;
+        padding: 5px 10px;
+        font-size: 0.9em;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        background-color: #093554;
+        color: white;
+        transition: 0.2s;
+      }
+      
+      .acao-btn:hover {
+        background-color: #0072bc;
+      }
+      
+      .acao-btn.excluir {
+        background-color: #c0392b;
+      }
+      
+      .acao-btn.excluir:hover {
+        background-color: #e74c3c;
+      }
+
+    hr {
+      border: none;
+      height: 1px;
+      background-color: #093554;
+      width: 20%;
+      margin: 10px auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="conteudo">
+    <div class="formulario">
+      <h1>Editor de Tarefas</h1>
+      <form action="/tarefas/editar/{{ id }}" method="POST">
+        <input value="{{tarefa}}" type="text" id="conteudo"
+        name="conteudo" placeholder="O que precisa ser feito?" required>
+        <button type="submit" class="btn">Confirmar edição</button> 
+      </form>
+    </div>
+  </div>
+</body>
+</html>

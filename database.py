@@ -110,7 +110,7 @@ def tarefa_concluida(id):
     conexao.commit()
     return True
 
-def tarefa_excluir(id):
+def excluir_tarefa(id):
     conexao = conectar_banco()
     cursor = conexao.cursor()
     
@@ -123,10 +123,27 @@ def excluir_usuario(email):
     conexao = conectar_banco()
     cursor = conexao.cursor()
     
-    cursor.execute('''DELETE FROM usuarios WHERE email_usuario=?''', (email,))
+    cursor.execute('''DELETE FROM tarefas WHERE email=?''', (email,))
     cursor.execute('''DELETE FROM usuarios WHERE email=?''', (email,))
     conexao.commit()
     return True
 
+def buscar_conteudo_tarefa(id):
+    conexao = conectar_banco()
+    cursor = conexao.cursor()
+    cursor.execute("SELECT conteudo FROM tarefas WHERE id=?", (id,))
+    conexao.commit()
+    conteudo = cursor.fetchone()
+    
+    return(conteudo[0])
+
+def editar_tarefa(novo_conteudo, id):
+    conexao = conectar_banco()
+    cursor = conexao.cursor()
+    cursor.execute("UPDATE tarefas SET conteudo=? WHERE id=?", (novo_conteudo, id))
+    conexao.commit()
+   
+    return True
+    
 if __name__ == "__main__":
     criar_tabelas()
